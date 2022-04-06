@@ -1,0 +1,13 @@
+.app {
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+.centering {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    padding-top: 5vh;
+    flex-direction: column;
+}

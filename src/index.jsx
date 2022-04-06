@@ -13,7 +13,7 @@ element of the HTML document (this is actually using the DOM API to find this el
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
+import App from './components/App';
 import './index.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
