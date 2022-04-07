@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
-import { Context } from './App';
+import { WordleContext } from './App';
 
 
-export default function Letter({letterPosition, attemptedValue}) {
-    const { board } = useContext(Context);
-    const letter = board[attemptedValue][letterPosition];
+export default function Letter({letterIndex, attempt}) {
+    const { board } = useContext(WordleContext);
+    const currLetter = board[attempt][letterIndex];
 
 
     return (
-        <div className="letter" > {letter} </div>
+        <div className="letter" > {currLetter} </div>
     );
 }

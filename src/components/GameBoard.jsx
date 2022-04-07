@@ -4,56 +4,56 @@ export default function Board() {
     return (
         <div className="board">
             <div className="row">
-                <Letter letterPosition={0} attemptedValue={0}/>
-                <Letter letterPosition={1} attemptedValue={0}/>
-                <Letter letterPosition={2} attemptedValue={0}/>
-                <Letter letterPosition={3} attemptedValue={0}/>
-                <Letter letterPosition={4} attemptedValue={0}/>
+                <Letter letterIndex={0} attempt={0}/>
+                <Letter letterIndex={1} attempt={0}/>
+                <Letter letterIndex={2} attempt={0}/>
+                <Letter letterIndex={3} attempt={0}/>
+                <Letter letterIndex={4} attempt={0}/>
             </div>
             <div className="row">
-                <Letter letterPosition={0} attemptedValue={1}/>
-                <Letter letterPosition={1} attemptedValue={1}/>
-                <Letter letterPosition={2} attemptedValue={1}/>
-                <Letter letterPosition={3} attemptedValue={1}/>
-                <Letter letterPosition={4} attemptedValue={1}/>
+                <Letter letterIndex={0} attempt={1}/>
+                <Letter letterIndex={1} attempt={1}/>
+                <Letter letterIndex={2} attempt={1}/>
+                <Letter letterIndex={3} attempt={1}/>
+                <Letter letterIndex={4} attempt={1}/>
             </div>
             <div className="row">
-                <Letter letterPosition={0} attemptedValue={2}/>
-                <Letter letterPosition={1} attemptedValue={2}/>
-                <Letter letterPosition={2} attemptedValue={2}/>
-                <Letter letterPosition={3} attemptedValue={2}/>
-                <Letter letterPosition={4} attemptedValue={2}/>
+                <Letter letterIndex={0} attempt={2}/>
+                <Letter letterIndex={1} attempt={2}/>
+                <Letter letterIndex={2} attempt={2}/>
+                <Letter letterIndex={3} attempt={2}/>
+                <Letter letterIndex={4} attempt={2}/>
             </div>
             <div className="row">
-                <Letter letterPosition={0} attemptedValue={3}/>
-                <Letter letterPosition={1} attemptedValue={3}/>
-                <Letter letterPosition={2} attemptedValue={3}/>
-                <Letter letterPosition={3} attemptedValue={3}/>
-                <Letter letterPosition={4} attemptedValue={3}/>
+                <Letter letterIndex={0} attempt={3}/>
+                <Letter letterIndex={1} attempt={3}/>
+                <Letter letterIndex={2} attempt={3}/>
+                <Letter letterIndex={3} attempt={3}/>
+                <Letter letterIndex={4} attempt={3}/>
             </div>
             <div className="row">
-                <Letter letterPosition={0} attemptedValue={4}/>
-                <Letter letterPosition={1} attemptedValue={4}/>
-                <Letter letterPosition={2} attemptedValue={4}/>
-                <Letter letterPosition={3} attemptedValue={4}/>
-                <Letter letterPosition={4} attemptedValue={4}/>
+                <Letter letterIndex={0} attempt={4}/>
+                <Letter letterIndex={1} attempt={4}/>
+                <Letter letterIndex={2} attempt={4}/>
+                <Letter letterIndex={3} attempt={4}/>
+                <Letter letterIndex={4} attempt={4}/>
             </div>
             <div className="row">
-                <Letter letterPosition={0} attemptedValue={5}/>
-                <Letter letterPosition={1} attemptedValue={5}/>
-                <Letter letterPosition={2} attemptedValue={5}/>
-                <Letter letterPosition={3} attemptedValue={5}/>
-                <Letter letterPosition={4} attemptedValue={5}/>
+                <Letter letterIndex={0} attempt={5}/>
+                <Letter letterIndex={1} attempt={5}/>
+                <Letter letterIndex={2} attempt={5}/>
+                <Letter letterIndex={3} attempt={5}/>
+                <Letter letterIndex={4} attempt={5}/>
             </div>
         </div>
     );
 }
 
 export const boardDefault = [
-    ["x", "", "", "", ""],
-    ["", "x", "", "", ""],
-    ["", "", "x", "", ""],
-    ["", "", "", "x", ""],
-    ["", "", "", "", "x"],
-    ["", "", "x", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
+    ["", "", "", "", ""],
 ];
