@@ -5,7 +5,7 @@ import './Keyboard.css'
 
 
 export default function Keyboard() {
-    const { enterPress, deletePress, keyPress, disabledLetters } = useContext(WordleContext);
+    const { deleteSelected,letterSelected, enterSelected, board, setBoard, currGuess, setCurrGuess } = useContext(WordleContext);
 
     const keyboardRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const keyboardRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
@@ -13,35 +13,35 @@ export default function Keyboard() {
 
 
     useEffect(() => {
-        document.addEventListener("keydown", manageKeyPress)
+        document.addEventListener("keydown", manageletterSelected)
         return function cleanup() {
-            document.removeEventListener("keydown", manageKeyPress)
+            document.removeEventListener("keydown", manageletterSelected)
         };
     });
 
-    const manageKeyPress = useCallback((event) => {
+    const manageletterSelected = useCallback((event) => {
 
-        console.log(event.key);
+        //console.log(event.key);
 
 
         if (event.key === "Enter") {
-            enterPress(); //------------------CREATE----------------
+            enterSelected();
         } else if (event.key === "Backspace") {
-            deletePress(); //------------------CREATE----------------
+            deleteSelected();
         } else {
-            keyboardRow1.forEach((key) => {
-                if (event.key.toUpperCase() === key) {
-                    keyPress(key) //------------------CREATE----------------
+            keyboardRow1.forEach((letter) => {
+                if (event.key.toUpperCase() === letter) {
+                    letterSelected(letter) //------------------CREATE----------------
                 }
             });
-            keyboardRow2.forEach((key) => {
-                if (event.key.toUpperCase() === key) {
-                    keyPress(key)
+            keyboardRow2.forEach((letter) => {
+                if (event.key.toUpperCase() === letter) {
+                    letterSelected(letter)
                 }
             });
-            keyboardRow3.forEach((key) => {
-                if (event.key.toUpperCase() === key) {
-                    keyPress(key)
+            keyboardRow3.forEach((letter) => {
+                if (event.key.toUpperCase() === letter) {
+                    letterSelected(letter)
                 }
             });
         }
@@ -49,17 +49,17 @@ export default function Keyboard() {
 
     return (
         <div className="keyboard">
-            <div className="line">
+            <div className="keyboardRow">
                 {keyboardRow1.map((key) => {
                     return <Key keyVal={key} />
                 })}
             </div>
-            <div className="line">
+            <div className="keyboardRow">
                 {keyboardRow2.map((key) => {
                     return <Key keyVal={key} />
                 })}
             </div>
-            <div className="line">
+            <div className="keyboardRow">
                 {keyboardRow3.map((key) => {
                     return <Key keyVal={key} />
                 })}

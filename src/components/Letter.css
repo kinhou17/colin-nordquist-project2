@@ -9,3 +9,15 @@
     font-weight: bolder;
     color: black;
 }
+
+#correct {
+    background-color: green;
+}
+
+#almost {
+    background-color: yellow;
+}
+
+#wrong {
+    background-color: #36343a;
+}
