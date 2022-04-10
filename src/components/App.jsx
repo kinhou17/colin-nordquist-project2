@@ -17,24 +17,32 @@ export default function App() {
     const [board, setBoard] = useState(boardDefault);
     const [currGuess, setCurrGuess] = useState({ guess: 0, letterIndex: 0}); 
     const [boardColors, setBoardColors] = useState(boardDefault2);
-    const [winningWord, setWinningWord] = useState("sweet");
+    const [winningWord, setWinningWord] = useState("house");
+    const [greenKeys, setGreenKeys] = useState([]);
+    const [yellowLetters, setYellowKeys] = useState([]);
     const [greenLetters, setGreenLetters] = useState([]);
 
 
-    let [currWord, setCurrWord] = useState('');
+
     
 
     function colorLetters() {
-        let correctLettersRemoved = checkGreens();
-        checkYellows(correctLettersRemoved);
-        setGreys()
+        let currGuessWord = '';
+        for (let i = 0; i < winningWord.length; i++) {
+            currGuessWord += board[currGuess.guess][i];
+        }
+        let greenLettersRemoved = checkGreens(currGuessWord);
+        console.log("Before " + greenLettersRemoved);
+        checkYellows(greenLettersRemoved);
+        //setGreys()
+        return currGuessWord;
     }
 
-    const checkGreens = () => {
+    const checkGreens = (currGuessWord) => {
         let greensRemoved = '';
-        let greenLettertemp = [...greenLetters];
+        let greenKeysTemp = [...greenKeys];
         for (let i = 0; i < winningWord.length; i++) {
-            const currLetter = currWord.charAt(i);
+            const currLetter = currGuessWord.charAt(i);
             if (winningWord.toUpperCase().charAt(i) === currLetter) {
                 let newBoard = [...boardColors];
                 newBoard[currGuess.guess][i] = 'green';
@@ -48,29 +56,41 @@ export default function App() {
                 greenLettertemp.push(currLetter);
                 //}
                 */
+                if (!greenKeysTemp.includes(currLetter)) {
+                    greenKeysTemp.push(currLetter);
+                }
             } else {
                 greensRemoved += currLetter;
             }
         }
-        //setGreenLetters(greenLettertemp);
+        setGreenKeys(greenKeysTemp);
         return greensRemoved;
     }
     
-    const checkYellows = (correctLettersRemoved) => {
-        for (let i = 0; i < correctLettersRemoved.length; i++) {
-            const currLetter = correctLettersRemoved.charAt(i);
+    const checkYellows = (greenLettersRemoved) => {
+        let LettersRemoved = greenLettersRemoved;
+        for (let i = 0; i < greenLettersRemoved.length; i++) {
+            const currLetter = greenLettersRemoved.charAt(i);
             if (currLetter != '-') {
                 for (let j = 0; j < winningWord.length; j++) {
-                    if (currLetter === winningWord.charAt(j).toUpperCase() && i != j && correctLettersRemoved.charAt(j) != '-') {
+                    if (currLetter === winningWord.charAt(j).toUpperCase() && i != j && LettersRemoved.charAt(j) != '-') {
                         let newBoard = [...boardColors];
                         newBoard[currGuess.guess][i] = 'yellow';
                         setBoardColors(newBoard);
+
+
+
+                        LettersRemoved = LettersRemoved.split('');
+                        LettersRemoved[j] = '-';
+                        LettersRemoved = LettersRemoved.join('');             
                         break;
                     }
                 }
             }
+        console.log("After " + LettersRemoved);
 
         }
+
     }
 
     const setGreys = () => {
@@ -91,14 +111,14 @@ export default function App() {
             return;
         }
 
-        colorLetters();
+        let currGuessWord = colorLetters();
 
-        if (currWord === winningWord.toUpperCase()) {
+        if (currGuessWord === winningWord.toUpperCase()) {
             // ---------------------------WIN CONDITION-----------------------------
             alert("YOU WIN");
         } else {
             setCurrGuess({guess: currGuess.guess + 1, letterIndex: 0});
-            setCurrWord('');
+            //setCurrWord('');
         }
     }
 
@@ -107,7 +127,7 @@ export default function App() {
         const currBoard = [...board];
         const newIndex = currGuess.letterIndex - 1;
         currBoard[currGuess.guess][newIndex] = '';
-        setCurrWord(currWord.substring(0, currWord.length - 1));
+        // setCurrWord(currWord.substring(0, currWord.length - 1));
         setCurrGuess({ guess: currGuess.guess, letterIndex: newIndex});
         setBoard(currBoard);
     }
@@ -116,7 +136,7 @@ export default function App() {
         const currBoard = [...board];
         if (currGuess.letterIndex > 4) return;
         currBoard[currGuess.guess][currGuess.letterIndex] = key;
-        setCurrWord(currWord += key);
+        // setCurrWord(currWord += key);
         setBoard(currBoard);
         setCurrGuess({ guess: currGuess.guess, letterIndex: currGuess.letterIndex + 1});
     }
@@ -133,7 +153,7 @@ export default function App() {
                     currGuess,
                     setCurrGuess,
                     boardColors,
-                    greenLetters,
+                    greenKeys,
                     enterSelected,
                     deleteSelected,
                     letterSelected,

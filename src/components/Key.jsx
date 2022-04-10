@@ -4,9 +4,9 @@ import {WordleContext} from './App';
 
 export default function Key({keyVal}) {
 
-    const {greenLetters} = useContext(WordleContext);
+    const {greenKeys} = useContext(WordleContext);
     let color = '';
-    if (greenLetters.includes(keyVal)) {
+    if (greenKeys.includes(keyVal)) {
         color = 'green';
     }
 
