@@ -31,7 +31,7 @@ export default function Keyboard() {
         } else {
             keyboardRow1.forEach((letter) => {
                 if (event.key.toUpperCase() === letter) {
-                    letterSelected(letter) //------------------CREATE----------------
+                    letterSelected(letter)
                 }
             });
             keyboardRow2.forEach((letter) => {
