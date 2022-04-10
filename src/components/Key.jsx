@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './Key.css';
+import {WordleContext} from './App';
 
 export default function Key({keyVal}) {
 
-    return (<div className="key">{keyVal}</div>);
+    const {greenLetters} = useContext(WordleContext);
+    let color = '';
+    if (greenLetters.includes(keyVal)) {
+        color = 'green';
+    }
+
+    return (<div className="key" id={color}>{keyVal}</div>);
 }

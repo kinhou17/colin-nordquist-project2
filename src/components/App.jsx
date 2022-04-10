@@ -17,77 +17,81 @@ export default function App() {
     const [board, setBoard] = useState(boardDefault);
     const [currGuess, setCurrGuess] = useState({ guess: 0, letterIndex: 0}); 
     const [boardColors, setBoardColors] = useState(boardDefault2);
-    const [winningWord, setWinningWord] = useState("hpppy");
+    const [winningWord, setWinningWord] = useState("sweet");
+    const [greenLetters, setGreenLetters] = useState([]);
 
 
     let [currWord, setCurrWord] = useState('');
     
 
     function colorLetters() {
-        let validateWord = currWord;  //------------------change ---------------
-        console.log("before:");
-        console.log(validateWord);
-
-        let correctLettersRemoved = checkGreens(validateWord);
-
-        console.log("middle:");
-        console.log(correctLettersRemoved);
-
-        let allLettersRemoved = checkYellows(validateWord, correctLettersRemoved);
-        
-        console.log("after:");
-        console.log(allLettersRemoved);
-
-        
+        let correctLettersRemoved = checkGreens();
+        checkYellows(correctLettersRemoved);
+        setGreys()
     }
 
-    const checkGreens = (validateWord) => {
+    const checkGreens = () => {
         let greensRemoved = '';
+        let greenLettertemp = [...greenLetters];
         for (let i = 0; i < winningWord.length; i++) {
-            const currLetter = validateWord.charAt(i);
+            const currLetter = currWord.charAt(i);
             if (winningWord.toUpperCase().charAt(i) === currLetter) {
                 let newBoard = [...boardColors];
-                newBoard[currGuess.guess][i] = 'correct';
+                newBoard[currGuess.guess][i] = 'green';
                 setBoardColors(newBoard);
-                greensRemoved += ' ';
+                greensRemoved += '-';
+                /*
+                console.log("CURRENT LETTER: " + currLetter)
+                console.log("GREEN LETTERS: " + greenLetters);
+                console.log("GREEN LETTERS TEMP: " + greenLettertemp);
+                //if (!greenLettertemp.includes(currLetter)) {
+                greenLettertemp.push(currLetter);
+                //}
+                */
             } else {
-                greensRemoved += winningWord.charAt(i);
+                greensRemoved += currLetter;
             }
         }
+        //setGreenLetters(greenLettertemp);
         return greensRemoved;
     }
     
-    const checkYellows = (validateWord, correctLettersRemoved) => {
-        for (let i = 0; i < validateWord.length; i++) {
-            const currLetter = validateWord.charAt(i);
-            for (let j = 0; j < correctLettersRemoved.length; j++) {
-                if (currLetter === correctLettersRemoved.charAt(j).toUpperCase() && correctLettersRemoved.charAt(j) != ' ') {
-                    let newBoard = [...boardColors];
-                    newBoard[currGuess.guess][i] = 'almost';
-                    setBoardColors(newBoard);
-
-                    correctLettersRemoved = correctLettersRemoved.split('');
-                    correctLettersRemoved[j] = ' ';
-                    correctLettersRemoved = correctLettersRemoved.join('');
-                    break;
+    const checkYellows = (correctLettersRemoved) => {
+        for (let i = 0; i < correctLettersRemoved.length; i++) {
+            const currLetter = correctLettersRemoved.charAt(i);
+            if (currLetter != '-') {
+                for (let j = 0; j < winningWord.length; j++) {
+                    if (currLetter === winningWord.charAt(j).toUpperCase() && i != j && correctLettersRemoved.charAt(j) != '-') {
+                        let newBoard = [...boardColors];
+                        newBoard[currGuess.guess][i] = 'yellow';
+                        setBoardColors(newBoard);
+                        break;
+                    }
                 }
             }
+
         }
-        return correctLettersRemoved;
+    }
+
+    const setGreys = () => {
+        for (let i = 0; i < winningWord.length; i++) {
+            if (boardColors[currGuess.guess][i] === '') {
+                let newBoard = [...boardColors];
+                newBoard[currGuess.guess][i] = 'grey';
+                setBoardColors(newBoard);
+
+            }
+        }
     }
 
 
-
     function enterSelected() {
-
-
         if (currGuess.letterIndex < 5) {
             alert("Guess must be 5 letter long");
             return;
         }
 
         colorLetters();
-
 
         if (currWord === winningWord.toUpperCase()) {
             // ---------------------------WIN CONDITION-----------------------------
@@ -108,8 +112,6 @@ export default function App() {
         setBoard(currBoard);
     }
 
-
-
     function letterSelected(key) {
         const currBoard = [...board];
         if (currGuess.letterIndex > 4) return;
@@ -118,8 +120,6 @@ export default function App() {
         setBoard(currBoard);
         setCurrGuess({ guess: currGuess.guess, letterIndex: currGuess.letterIndex + 1});
     }
-
-
 
     return (
         <div className="app">
@@ -133,6 +133,7 @@ export default function App() {
                     currGuess,
                     setCurrGuess,
                     boardColors,
+                    greenLetters,
                     enterSelected,
                     deleteSelected,
                     letterSelected,

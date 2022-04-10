@@ -10,14 +10,14 @@
     color: black;
 }
 
-#correct {
+#green {
     background-color: green;
 }
 
-#almost {
+#yellow {
     background-color: yellow;
 }
 
-#wrong {
+#grey {
     background-color: #36343a;
 }
