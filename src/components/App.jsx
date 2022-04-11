@@ -1,7 +1,10 @@
-import React, { useState, createContext } from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import Board from './GameBoard';
 import Keyboard from './Keyboard';
-import { boardDefault, boardDefault2 } from './GameBoard';
+import FinishGame from './FinishGame';
+import {boardDefault, boardDefault2} from './GameBoard';
+import {generateWordSet, generateDictionary} from './WordSets';
+
 
 
 import "./App.css";
@@ -15,27 +18,45 @@ export default function App() {
 
 
     const [board, setBoard] = useState(boardDefault);
-    const [currGuess, setCurrGuess] = useState({ guess: 0, letterIndex: 0}); 
+    const [currGuess, setCurrGuess] = useState({ 
+        guess: 0, 
+        letterIndex: 0
+    }); 
     const [boardColors, setBoardColors] = useState(boardDefault2);
-    const [winningWord, setWinningWord] = useState("tater");
+    const [winningWord, setWinningWord] = useState("");
     const [greenKeys, setGreenKeys] = useState([]);
     const [yellowKeys, setYellowKeys] = useState([]);
     const [disabledKeys, setDisabledKeys] = useState([]);
+    const [gameState, setGameState] = useState({
+        gameInProgress: true,
+        playerWon: false
+    });
+
+    const [wordSet, setWordSet] = useState(new Set());
+    const [dictSet, setDictSet] = useState(new Set());
 
 
 
+    useEffect(() => {
+        generateWordSet().then((words) => {
+            setWordSet(words.wordSet);
+            setWinningWord(words.currWord);
+            console.log(words.currWord);
+        });
+    }, []);
+
+    useEffect(() => {
+        generateDictionary().then((words) => {
+            setDictSet(words.dictSet);
+        });
+    }, []);
     
 
-    function colorLetters() {
-        let currGuessWord = '';
-        for (let i = 0; i < winningWord.length; i++) {
-            currGuessWord += board[currGuess.guess][i];
-        }
+    function manageColoring(currGuessWord) {
+
         let greenLettersRemoved = checkGreens(currGuessWord);
-        console.log("Before " + greenLettersRemoved);
         checkYellows(greenLettersRemoved);
         setGreys()
-        return currGuessWord;
     }
 
     const checkGreens = (currGuessWord) => {
@@ -48,14 +69,6 @@ export default function App() {
                 newBoard[currGuess.guess][i] = 'green';
                 setBoardColors(newBoard);
                 greensRemoved += '-';
-                /*
-                console.log("CURRENT LETTER: " + currLetter)
-                console.log("GREEN LETTERS: " + greenLetters);
-                console.log("GREEN LETTERS TEMP: " + greenLettertemp);
-                //if (!greenLettertemp.includes(currLetter)) {
-                greenLettertemp.push(currLetter);
-                //}
-                */
                 if (!greenKeysTemp.includes(currLetter)) {
                     greenKeysTemp.push(currLetter);
                 }
@@ -78,11 +91,9 @@ export default function App() {
                         let newBoard = [...boardColors];
                         newBoard[currGuess.guess][i] = 'yellow';
                         setBoardColors(newBoard);
-
                         if (!yellowKeysTemp.includes(currLetter) && !greenKeys.includes(currLetter)) {
                             yellowKeysTemp.push(currLetter);
                         }
-
                         LettersRemoved = LettersRemoved.split('');
                         LettersRemoved[j] = '-';
                         LettersRemoved = LettersRemoved.join('');             
@@ -118,16 +129,24 @@ export default function App() {
 
 
     function enterSelected() {
-        if (currGuess.letterIndex < 5) {
-            alert("Guess must be 5 letter long");
+        if (currGuess.letterIndex < winningWord.length) {
+            alert("Guess must be " + winningWord.length + " letters long. Please try again.");
             return;
         }
-
-        let currGuessWord = colorLetters();
-
+        let currGuessWord = '';
+        for (let i = 0; i < winningWord.length; i++) {
+            currGuessWord += board[currGuess.guess][i];
+        }
+        if (!dictSet.has(currGuessWord)) {
+            alert("Sorry, " + currGuessWord + " is not a valid word. Please try again.");
+            return;
+        }
+        manageColoring(currGuessWord);
         if (currGuessWord === winningWord.toUpperCase()) {
-            // ---------------------------WIN CONDITION-----------------------------
-            alert("YOU WIN");
+            setGameState({
+                gameInProgress: false, 
+                playerWon: true
+            })
         } else {
             setCurrGuess({guess: currGuess.guess + 1, letterIndex: 0});
         }
@@ -168,10 +187,11 @@ export default function App() {
                     enterSelected,
                     deleteSelected,
                     letterSelected,
+                    gameState
                 }
             }>
                 <div className="centering">
-                    <Board />
+                    {gameState.gameInProgress ? <Board/> : <FinishGame />}
                     <Keyboard />
                 </div>
             </WordleContext.Provider>
