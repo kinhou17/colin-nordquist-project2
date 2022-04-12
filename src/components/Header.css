@@ -1,0 +1,16 @@
+nav {
+    height: 70px;
+    width: 100vw;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    background-color: #022B3A;
+    border: 0;
+}
+
+nav h1 {
+    margin: 0;
+    font-family: Arial;
+    color: #FFFFFF;
+    font-size: 55px;
+}

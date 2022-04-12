@@ -46,6 +46,20 @@ export default function Board() {
                 <Letter letterIndex={3} attempt={5} />
                 <Letter letterIndex={4} attempt={5} />
             </div>
+            <div className="row">
+                <Letter letterIndex={0} attempt={5} />
+                <Letter letterIndex={1} attempt={5} />
+                <Letter letterIndex={2} attempt={5} />
+                <Letter letterIndex={3} attempt={5} />
+                <Letter letterIndex={4} attempt={5} />
+            </div>
+            <div className="row">
+                <Letter letterIndex={0} attempt={5} />
+                <Letter letterIndex={1} attempt={5} />
+                <Letter letterIndex={2} attempt={5} />
+                <Letter letterIndex={3} attempt={5} />
+                <Letter letterIndex={4} attempt={5} />
+            </div>
         </div>
     );
 }

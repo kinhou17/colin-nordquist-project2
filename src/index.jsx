@@ -13,7 +13,23 @@ element of the HTML document (this is actually using the DOM API to find this el
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './components/App';
+import Header from './components/Header';
+import Instructions from './components/Instructions';
 import './index.css';
+import HomePage from './components/HomePage';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+
+ReactDOM.render(
+    
+    <BrowserRouter>
+        <Header />
+        <Routes>
+            <Route path="/instructions" element={ <Instructions />} />
+            <Route path="/game/:difficulty" element={ <App />} />
+            <Route path="/" element={ <HomePage />} />
+        </Routes>
+    </BrowserRouter>,
+    document.getElementById('root'));

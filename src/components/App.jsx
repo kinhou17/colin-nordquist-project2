@@ -1,4 +1,5 @@
 import React, {useState, useEffect, createContext} from 'react';
+import { useParams } from 'react-router';
 import Board from './GameBoard';
 import Keyboard from './Keyboard';
 import FinishGame from './FinishGame';
@@ -14,7 +15,11 @@ import "./GameBoard.css";
 export const WordleContext = createContext();
 
 
-export default function App() {
+export default function App(props) {
+
+    const pathParams = useParams();
+    const difficulty = pathParams.difficulty;
+
 
 
     const [board, setBoard] = useState(boardDefault);
@@ -171,9 +176,6 @@ export default function App() {
 
     return (
         <div className="app">
-            <nav>
-                <h1>Weddle</h1>
-            </nav>
             <WordleContext.Provider value={
                 {
                     board,
