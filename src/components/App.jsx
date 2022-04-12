@@ -156,7 +156,7 @@ export default function App(props) {
         } else {
             setCurrGuess({ guess: currGuess.guess + 1, letterIndex: 0 });
         }
-        if (currGuess.guess >= difficultyOptions.guesses) {
+        if (currGuess.guess >= difficultyOptions.guesses - 1) {
             setGameState({
                 gameInProgress: false,
                 playerWon: false
