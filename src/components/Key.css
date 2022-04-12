@@ -34,12 +34,11 @@
     .key {
         width: 7vw;
         height: 5vh;
-        margin: 5px;
-        font-size: 10px;
+        margin: 3px;
+        font-size: 12px;
     }
 
     #large {
-        width: 5vh;
-    
+        width: 6vh;
     }
 }
