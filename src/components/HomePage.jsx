@@ -12,9 +12,14 @@ export default function HomePage() {
                 Welcome to Wordle!
                 <br></br>
                 <br></br>
-                Below you may click a difficulty to begin a game, or instructions to learn how to play.
+                Below you may click a difficulty to begin a game,
                 <br></br>
-                Anytime you want to return to this home page, click the title at the top of the page.
+                or instructions to learn how to play.
+                <br></br>
+                Anytime you want to return to this home page,
+                <br></br>
+                click the title at the top of the page.
+                <br></br>
                 <img src={wordlePic}></img>
                 <br></br>
                 <br></br>

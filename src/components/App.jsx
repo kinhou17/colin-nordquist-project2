@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import GameBoard from './GameBoard';
 import Keyboard from './Keyboard';
 import FinishGame from './FinishGame';
+import Title from './Title';
 import { startingBoardEasy, startingBoardMedium, startingBoardHard, boardColorsEasy, boardColorsMedium, boardColorsHard } from './GameBoard';
 import { generateWordSet, generateDictionary } from './WordSets';
 import bingo from '../bingo.gif';
@@ -38,6 +39,7 @@ export default function App(props) {
         gameInProgress: true,
         playerWon: false
     });
+    const [error, setError] = useState("none");
 
     const [wordSet, setWordSet] = useState(new Set());
     const [dictSet, setDictSet] = useState(new Set());
@@ -137,18 +139,22 @@ export default function App(props) {
 
     function enterSelected() {
         if (currGuess.letterIndex < difficultyOptions.numLetters) {
-            alert("Guess must be " + difficultyOptions.numLetters + " letters long. Please try again.");
+            setError("lengthShort");
             return;
         }
+
         let currGuessWord = '';
         for (let i = 0; i < difficultyOptions.numLetters; i++) {
             currGuessWord += board[currGuess.guess][i];
         }
+
         if (!dictSet.has(currGuessWord) && !wordSet.has(currGuessWord)) {
-            alert("Sorry, " + currGuessWord + " is not a valid word. Please try again.");
+            setError("invalidWord");
             return;
         }
+
         manageColoring(currGuessWord);
+
         if (currGuessWord === winningWord.toUpperCase()) {
             setGameState({
                 gameInProgress: false,
@@ -156,17 +162,19 @@ export default function App(props) {
             })
         } else {
             setCurrGuess({ guess: currGuess.guess + 1, letterIndex: 0 });
-        }
-        if (currGuess.guess >= difficultyOptions.guesses - 1) {
-            setGameState({
-                gameInProgress: false,
-                playerWon: false
-            })
+            if (currGuess.guess >= difficultyOptions.guesses - 1) {
+                setGameState({
+                    gameInProgress: false,
+                    playerWon: false
+                })
+            }
         }
     }
 
+
     function deleteSelected() {
         if (currGuess.letterIndex === 0) return;
+        setError("none");
         const currBoard = [...board];
         const newIndex = currGuess.letterIndex - 1;
         currBoard[currGuess.guess][newIndex] = '';
@@ -176,7 +184,12 @@ export default function App(props) {
 
     function letterSelected(key) {
         const currBoard = [...board];
-        if (currGuess.letterIndex >= difficultyOptions.numLetters) return;
+        if (currGuess.letterIndex >= difficultyOptions.numLetters) {
+            setError("lengthLong");
+            return;
+        } else {
+            setError("none");
+        }
         currBoard[currGuess.guess][currGuess.letterIndex] = key;
         setBoard(currBoard);
         setCurrGuess({ guess: currGuess.guess, letterIndex: currGuess.letterIndex + 1 });
@@ -184,13 +197,6 @@ export default function App(props) {
 
     return (
         <div className="app">
-            <div className="title">
-                {gameState.gameInProgress ?
-                    <div>Try to guess the {difficultyOptions.numLetters}-letter word.
-                        <br></br>
-                        You have {difficultyOptions.guesses} attempts.
-                    </div>
-                    : <img src={bingo}></img>}</div>
             <WordleContext.Provider value={
                 {
                     board,
@@ -206,10 +212,13 @@ export default function App(props) {
                     letterSelected,
                     gameState,
                     difficulty,
-                    winningWord
+                    winningWord,
+                    difficultyOptions,
+                    error
                 }
             }>
                 <div className="centering">
+                    <Title />
                     {gameState.gameInProgress ? <GameBoard /> : <FinishGame />}
                     <Keyboard />
                 </div>
