@@ -1,21 +1,43 @@
 import React, { useState } from 'react';
 
-import wordBank from "../5letterWordBank.txt";
+import wordBank5 from "../5letterWordBank.txt";
+import wordBank6 from "../6letterWordBank.txt";
+import wordBank7 from "../7letterWordBank.txt";
 import scrabbleDict from "../scrabbleDictionary.txt";
 
 
-export const generateWordSet = async () => {
+export const generateWordSet = async (difficulty) => {
     let wordSet;
     let currWord;
-    await fetch(wordBank)
-        .then((response) => response.text())
-        .then((result) => { 
-            const wordArray = result.split("\n")
-            currWord = wordArray[Math.floor(Math.random() * wordArray.length)];
-            wordSet = new Set(wordArray);
-        });
+    if (difficulty === "easy") {
+        await fetch(wordBank5)
+            .then((response) => response.text())
+            .then((result) => {
+                const wordArray = result.split("\n")
+                currWord = wordArray[Math.floor(Math.random() * wordArray.length)];
+                wordSet = new Set(wordArray);
+            });
+        return { currWord, wordSet };
+    } else if (difficulty === "medium") {
+        await fetch(wordBank6)
+            .then((response) => response.text())
+            .then((result) => {
+                const wordArray = result.split("\n")
+                currWord = wordArray[Math.floor(Math.random() * wordArray.length)];
+                wordSet = new Set(wordArray);
+            });
+        return { currWord, wordSet };
 
-    return {currWord, wordSet};
+    } else {
+        await fetch(wordBank7)
+            .then((response) => response.text())
+            .then((result) => {
+                const wordArray = result.split("\n")
+                currWord = wordArray[Math.floor(Math.random() * wordArray.length)];
+                wordSet = new Set(wordArray);
+            });
+        return { currWord, wordSet };
+    }
 }
 
 
@@ -23,10 +45,10 @@ export const generateDictionary = async () => {
     let dictSet;
     await fetch(scrabbleDict)
         .then((response) => response.text())
-        .then((result) => { 
+        .then((result) => {
             const dictArray = result.replaceAll("\r", "").split("\n");
             dictSet = new Set(dictArray);
         });
 
-    return {dictSet};
+    return { dictSet };
 }

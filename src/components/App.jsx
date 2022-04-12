@@ -1,10 +1,10 @@
-import React, {useState, useEffect, createContext} from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { useParams } from 'react-router';
 import Board from './GameBoard';
 import Keyboard from './Keyboard';
 import FinishGame from './FinishGame';
-import {boardDefault, boardDefault2} from './GameBoard';
-import {generateWordSet, generateDictionary} from './WordSets';
+import { startingBoardEasy, startingBoardMedium, startingBoardHard, boardColorsEasy, boardColorsMedium, boardColorsHard } from './GameBoard';
+import { generateWordSet, generateDictionary } from './WordSets';
 
 
 
@@ -22,12 +22,13 @@ export default function App(props) {
 
 
 
-    const [board, setBoard] = useState(boardDefault);
-    const [currGuess, setCurrGuess] = useState({ 
-        guess: 0, 
+    const [board, setBoard] = useState(difficulty === "easy" ? startingBoardEasy : difficulty === "medium" ? startingBoardMedium : startingBoardHard);
+    const [currGuess, setCurrGuess] = useState({
+        guess: 0,
         letterIndex: 0
-    }); 
-    const [boardColors, setBoardColors] = useState(boardDefault2);
+    });
+    const [difficultyOptions, setDifficultyOptions] = useState(difficulty === "easy" ? { guesses: 7, numLetters: 5 } : difficulty === "medium" ? { guesses: 6, numLetters: 6 } : { guesses: 5, numLetters: 7 });
+    const [boardColors, setBoardColors] = useState(difficulty === "easy" ? boardColorsEasy : difficulty === "medium" ? boardColorsMedium : boardColorsHard);
     const [winningWord, setWinningWord] = useState("");
     const [greenKeys, setGreenKeys] = useState([]);
     const [yellowKeys, setYellowKeys] = useState([]);
@@ -43,7 +44,7 @@ export default function App(props) {
 
 
     useEffect(() => {
-        generateWordSet().then((words) => {
+        generateWordSet(difficulty).then((words) => {
             setWordSet(words.wordSet);
             setWinningWord(words.currWord);
             console.log(words.currWord);
@@ -55,7 +56,7 @@ export default function App(props) {
             setDictSet(words.dictSet);
         });
     }, []);
-    
+
 
     function manageColoring(currGuessWord) {
 
@@ -67,7 +68,7 @@ export default function App(props) {
     const checkGreens = (currGuessWord) => {
         let greensRemoved = '';
         let greenKeysTemp = [...greenKeys];
-        for (let i = 0; i < winningWord.length; i++) {
+        for (let i = 0; i < difficultyOptions.numLetters; i++) {
             const currLetter = currGuessWord.charAt(i);
             if (winningWord.toUpperCase().charAt(i) === currLetter) {
                 let newBoard = [...boardColors];
@@ -84,14 +85,14 @@ export default function App(props) {
         setGreenKeys(greenKeysTemp);
         return greensRemoved;
     }
-    
+
     const checkYellows = (greenLettersRemoved) => {
         let LettersRemoved = greenLettersRemoved;
         let yellowKeysTemp = [...yellowKeys];
-        for (let i = 0; i < greenLettersRemoved.length; i++) {
+        for (let i = 0; i < difficultyOptions.numLetters; i++) {
             const currLetter = greenLettersRemoved.charAt(i);
             if (currLetter != '-') {
-                for (let j = 0; j < winningWord.length; j++) {
+                for (let j = 0; j < difficultyOptions.numLetters; j++) {
                     if (currLetter === winningWord.charAt(j).toUpperCase() && i != j && LettersRemoved.charAt(j) != '-') {
                         let newBoard = [...boardColors];
                         newBoard[currGuess.guess][i] = 'yellow';
@@ -101,12 +102,12 @@ export default function App(props) {
                         }
                         LettersRemoved = LettersRemoved.split('');
                         LettersRemoved[j] = '-';
-                        LettersRemoved = LettersRemoved.join('');             
+                        LettersRemoved = LettersRemoved.join('');
                         break;
                     }
                 }
             }
-        setYellowKeys(yellowKeysTemp);
+            setYellowKeys(yellowKeysTemp);
 
         }
 
@@ -114,9 +115,9 @@ export default function App(props) {
 
     const setGreys = () => {
         let disabledKeysTemp = [...disabledKeys];
-        
 
-        for (let i = 0; i < winningWord.length; i++) {
+
+        for (let i = 0; i < difficultyOptions.numLetters; i++) {
             if (boardColors[currGuess.guess][i] === '') {
                 let newBoard = [...boardColors];
                 newBoard[currGuess.guess][i] = 'grey';
@@ -134,26 +135,32 @@ export default function App(props) {
 
 
     function enterSelected() {
-        if (currGuess.letterIndex < winningWord.length) {
-            alert("Guess must be " + winningWord.length + " letters long. Please try again.");
+        if (currGuess.letterIndex < difficultyOptions.numLetters) {
+            alert("Guess must be " + difficultyOptions.numLetters + " letters long. Please try again.");
             return;
         }
         let currGuessWord = '';
-        for (let i = 0; i < winningWord.length; i++) {
+        for (let i = 0; i < difficultyOptions.numLetters; i++) {
             currGuessWord += board[currGuess.guess][i];
         }
-        if (!dictSet.has(currGuessWord)) {
+        if (!dictSet.has(currGuessWord) && !wordSet.has(currGuessWord)) {
             alert("Sorry, " + currGuessWord + " is not a valid word. Please try again.");
             return;
         }
         manageColoring(currGuessWord);
         if (currGuessWord === winningWord.toUpperCase()) {
             setGameState({
-                gameInProgress: false, 
+                gameInProgress: false,
                 playerWon: true
             })
         } else {
-            setCurrGuess({guess: currGuess.guess + 1, letterIndex: 0});
+            setCurrGuess({ guess: currGuess.guess + 1, letterIndex: 0 });
+        }
+        if (currGuess.guess >= difficultyOptions.guesses) {
+            setGameState({
+                gameInProgress: false,
+                playerWon: false
+            })
         }
     }
 
@@ -162,16 +169,16 @@ export default function App(props) {
         const currBoard = [...board];
         const newIndex = currGuess.letterIndex - 1;
         currBoard[currGuess.guess][newIndex] = '';
-        setCurrGuess({ guess: currGuess.guess, letterIndex: newIndex});
+        setCurrGuess({ guess: currGuess.guess, letterIndex: newIndex });
         setBoard(currBoard);
     }
 
     function letterSelected(key) {
         const currBoard = [...board];
-        if (currGuess.letterIndex > 4) return;
+        if (currGuess.letterIndex >= difficultyOptions.numLetters) return;
         currBoard[currGuess.guess][currGuess.letterIndex] = key;
         setBoard(currBoard);
-        setCurrGuess({ guess: currGuess.guess, letterIndex: currGuess.letterIndex + 1});
+        setCurrGuess({ guess: currGuess.guess, letterIndex: currGuess.letterIndex + 1 });
     }
 
     return (
@@ -189,11 +196,13 @@ export default function App(props) {
                     enterSelected,
                     deleteSelected,
                     letterSelected,
-                    gameState
+                    gameState,
+                    difficulty,
+                    winningWord
                 }
             }>
                 <div className="centering">
-                    {gameState.gameInProgress ? <Board/> : <FinishGame />}
+                    {gameState.gameInProgress ? <Board /> : <FinishGame />}
                     <Keyboard />
                 </div>
             </WordleContext.Provider>
