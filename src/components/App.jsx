@@ -1,10 +1,11 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { useParams } from 'react-router';
-import Board from './GameBoard';
+import GameBoard from './GameBoard';
 import Keyboard from './Keyboard';
 import FinishGame from './FinishGame';
 import { startingBoardEasy, startingBoardMedium, startingBoardHard, boardColorsEasy, boardColorsMedium, boardColorsHard } from './GameBoard';
 import { generateWordSet, generateDictionary } from './WordSets';
+import bingo from '../bingo.gif';
 
 
 
@@ -183,7 +184,13 @@ export default function App(props) {
 
     return (
         <div className="app">
-            <div className="title">Try to guess the {difficultyOptions.numLetters}-letter word.<br></br>You have {difficultyOptions.guesses} attempts.</div>
+            <div className="title">
+                {gameState.gameInProgress ?
+                    <div>Try to guess the {difficultyOptions.numLetters}-letter word.
+                        <br></br>
+                        You have {difficultyOptions.guesses} attempts.
+                    </div>
+                    : <img src={bingo}></img>}</div>
             <WordleContext.Provider value={
                 {
                     board,
@@ -203,7 +210,7 @@ export default function App(props) {
                 }
             }>
                 <div className="centering">
-                    {gameState.gameInProgress ? <Board /> : <FinishGame />}
+                    {gameState.gameInProgress ? <GameBoard /> : <FinishGame />}
                     <Keyboard />
                 </div>
             </WordleContext.Provider>

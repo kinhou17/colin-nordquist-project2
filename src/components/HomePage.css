@@ -1,0 +1,50 @@
+.homePage {
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    background-color: #022B3A;
+    padding-top: 15px;
+    justify-content: center;
+}
+
+#title {
+    margin-top: 5vh;
+    margin-left: 1px;
+    margin-right: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #E1E5F2;
+    font-size: 3vh;
+}
+
+.gameButton {
+    margin: auto;
+    border-radius: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vh;
+    background-color: #022B3A;
+    color: #BFDBF7;
+    border: 1px solid #BFDBF7;
+    padding: 1.5vh;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#instructions {
+    display: block;
+    margin: auto;
+}
+
+@media (max-width: 500px) {
+    #title {
+        margin-left: 2px;
+        margin-right: 2px;
+        font-size: 2.4vh;
+    }
+
+    .gameButton {
+        font-size: 2.4vh;
+    }
+}

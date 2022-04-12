@@ -1,5 +1,6 @@
 .keyboard {
-    padding-top: 10px;;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .keyboardRow {
@@ -8,7 +9,7 @@
     flex-direction: row;
     flex: 33%;
     margin: .1vh;
-    padding-top: .2vh;;
+    padding-top: .2vh;
 }
 
 @media (max-width: 500px) {

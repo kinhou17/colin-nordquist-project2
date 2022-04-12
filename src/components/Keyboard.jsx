@@ -6,17 +6,11 @@ import './Keyboard.css'
 
 export default function Keyboard() {
     const { deleteSelected, letterSelected, enterSelected, board, setBoard, currGuess, setCurrGuess } = useContext(WordleContext);
-
     const keyboardRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const keyboardRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-    const keyboardRow3 = ["ENTER", "X", "Z", "X", "C", "V", "B", "N", "M", "DEL"];
-
+    const keyboardRow3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DEL"];
 
     const manageletterSelected = useCallback((event) => {
-
-        //console.log(event.key);
-
-
         if (event.key === "Enter") {
             enterSelected();
         } else if (event.key === "Backspace") {

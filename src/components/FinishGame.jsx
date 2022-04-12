@@ -7,7 +7,7 @@ export default function GameOver() {
 
     let winLose;
     if (gameState.playerWon) {
-        winLose = "CONGRATULATIONS YOU GOT IT!";
+        winLose = "YOU GOT IT!";
     } else {
         winLose = "YOU FAILED";
     }
@@ -17,11 +17,11 @@ export default function GameOver() {
       }
 
     return (
-        <div className="Game Over!">
+        <div className="gameOver">
             <h2>{winLose}</h2>
-            <h2>Correct: {winningWord} </h2>
+            <h2>Correct Word: {winningWord} </h2>
             {gameState.playerWon && (<h2>You guessed in {currGuess.guess + 1} attempts</h2>)}
-            <button onClick={refreshPage}>Click to play again!</button>
+            <button id={"refreshButton"} onClick={refreshPage}>Click to play again!</button>
         </div>
     )
 }
