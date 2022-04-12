@@ -1,8 +1,8 @@
 .key {
     display: grid;
     place-items: center;
-    width: 5.5vh;
-    height: 5.5vh;
+    width: 5vh;
+    height: 5vh;
     margin: 5px;
     font-size: 1.4vh;
     font-weight: bold;
@@ -23,4 +23,23 @@
 #disabled {
     background-color: #022B3A;
     color: #022B3A;
+}
+
+#large {
+    width: 8vh;
+
+}
+
+@media (max-width: 500px) {
+    .key {
+        width: 3vh;
+        height: 5vh;
+        margin: 5px;
+        font-size: 10px;
+    }
+
+    #large {
+        width: 5vh;
+    
+    }
 }

@@ -10,3 +10,14 @@
     margin: 10px;
     padding-top: 10px;;
 }
+
+@media (max-width: 500px) {
+    .keyboard {
+        width: 100vw;
+    }
+
+    .keyboardRow {
+        margin:2px;
+        padding-top: 2px;
+    }
+}

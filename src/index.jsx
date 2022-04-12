@@ -23,7 +23,7 @@ import HomePage from './components/HomePage';
 
 
 ReactDOM.render(
-    
+    <body>
     <BrowserRouter>
         <Header />
         <Routes>
@@ -32,4 +32,5 @@ ReactDOM.render(
             <Route path="/" element={ <HomePage />} />
         </Routes>
     </BrowserRouter>,
+    </body>,
     document.getElementById('root'));

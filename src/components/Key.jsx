@@ -12,7 +12,7 @@ export default function Key({keyValue}) {
         color = 'yellow';
     } else if (disabledKeys.includes(keyValue)) {
         color = "disabled"
-    }
+    } 
 
     function keySelected() {
         if (keyValue === "ENTER") {
@@ -25,5 +25,5 @@ export default function Key({keyValue}) {
     };
 
 
-    return (<div className="key" id={color} onClick={keySelected}>{keyValue}</div>);
+    return (<div className="key" id={keyValue === "ENTER" || keyValue === "DEL" ? "large" : color} onClick={keySelected}>{keyValue}</div>);
 }

@@ -1,5 +1,5 @@
 .board {
-    height: 50vh;
+    height: 60vh;
     border: 1px solid #BFDBF7;
     display: flex;
     flex-direction: column;
@@ -13,4 +13,10 @@
     flex-direction: row;
     margin: 10px;
     align-items: center;
+}
+
+@media (max-width: 500px) {
+    .board {
+        height: 60vh;
+    }
 }

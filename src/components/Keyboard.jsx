@@ -5,11 +5,11 @@ import './Keyboard.css'
 
 
 export default function Keyboard() {
-    const { deleteSelected,letterSelected, enterSelected, board, setBoard, currGuess, setCurrGuess } = useContext(WordleContext);
+    const { deleteSelected, letterSelected, enterSelected, board, setBoard, currGuess, setCurrGuess } = useContext(WordleContext);
 
     const keyboardRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const keyboardRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
-    const keyboardRow3 = ["DEL", "Z", "X", "C", "V", "B", "N", "M", "ENTER"];
+    const keyboardRow3 = ["ENTER", "X", "Z", "X", "C", "V", "B", "N", "M", "DEL"];
 
 
     const manageletterSelected = useCallback((event) => {
@@ -48,7 +48,7 @@ export default function Keyboard() {
     });
 
     return (
-        <div className="keyboard"> 
+        <div className="keyboard">
             <div className="keyboardRow">
                 {keyboardRow1.map((key) => {
                     return <Key keyValue={key} />
