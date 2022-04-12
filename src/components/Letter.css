@@ -28,5 +28,7 @@
     .letter {
         margin: 1px;
         font-size: 25px;
+        height: 4vh;
+        width: 4vh;
     }
 }
