@@ -1,7 +1,12 @@
+.keyboard {
+    padding-top: 10px;;
+}
+
 .keyboardRow {
     justify-content: center;
     display: flex;
     flex-direction: row;
     flex: 33%;
     margin: 10px;
+    padding-top: 10px;;
 }

@@ -11,7 +11,7 @@ export default function Key({keyValue}) {
     } else if (yellowKeys.includes(keyValue)) {
         color = 'yellow';
     } else if (disabledKeys.includes(keyValue)) {
-        color = "white"
+        color = "disabled"
     }
 
     function keySelected() {

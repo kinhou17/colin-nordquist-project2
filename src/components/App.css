@@ -3,12 +3,22 @@
     height: 100vh;
     text-align: center;
     background-color: #022B3A;
+    padding-top: 15px;
+
 }
 
 .centering {
     width: 100vw;
     display: flex;
     align-items: center;
-    padding-top: 5vh;
+    padding-top: 1vh;
     flex-direction: column;
+}
+
+.title {
+    padding-top: 15px;
+    margin: 0;
+    font-family: Arial;
+    color: #FFFFFF;
+    font-size: 25px;
 }

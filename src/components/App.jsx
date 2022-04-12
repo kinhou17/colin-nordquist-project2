@@ -183,6 +183,7 @@ export default function App(props) {
 
     return (
         <div className="app">
+            <div className="title">Try to guess the {difficultyOptions.numLetters}-letter word.<br></br>You have {difficultyOptions.guesses} attempts.</div>
             <WordleContext.Provider value={
                 {
                     board,

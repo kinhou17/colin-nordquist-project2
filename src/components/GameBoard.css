@@ -1,13 +1,16 @@
 .board {
-    width: 450px;
+    height: 50vh;
     border: 1px solid #BFDBF7;
     display: flex;
     flex-direction: column;
+    top: 0;
+    padding: 0;
 }
 
 .row {
     flex: 33%;
     display: flex;
     flex-direction: row;
-    margin: 5px;
+    margin: 10px;
+    align-items: center;
 }
