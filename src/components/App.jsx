@@ -19,6 +19,9 @@ export default function App(props) {
     const [boardLetters, setBoardLetters] = useState(
         difficulty === "easy" ? startingBoardEasy : difficulty === "medium" ? startingBoardMedium : startingBoardHard
     );
+    const [boardColors, setBoardColors] = useState(
+        difficulty === "easy" ? boardColorsEasy : difficulty === "medium" ? boardColorsMedium : boardColorsHard
+    );
     const [currGuess, setCurrGuess] = useState({
         guess: 0,
         letterIndex: 0
@@ -26,10 +29,9 @@ export default function App(props) {
     const [difficultyOptions, setDifficultyOptions] = useState(
         difficulty === "easy" ? { guesses: 7, numLetters: 5 } : difficulty === "medium" ? { guesses: 6, numLetters: 6 } : { guesses: 5, numLetters: 7 }
     );
-    const [boardColors, setBoardColors] = useState(
-        difficulty === "easy" ? boardColorsEasy : difficulty === "medium" ? boardColorsMedium : boardColorsHard
-    );
+    const [winningWordSet, setWinningWordSet] = useState(new Set());
     const [winningWord, setWinningWord] = useState("");
+    const [dictSet, setDictSet] = useState(new Set());
     const [greenKeys, setGreenKeys] = useState([]);
     const [yellowKeys, setYellowKeys] = useState([]);
     const [disabledKeys, setDisabledKeys] = useState([]);
@@ -38,8 +40,6 @@ export default function App(props) {
         playerWon: false
     });
     const [error, setError] = useState("none");
-    const [winningWordSet, setWinningWordSet] = useState(new Set());
-    const [dictSet, setDictSet] = useState(new Set());
 
     useEffect(() => {
         createDictionarySet().then((dictWords) => {
