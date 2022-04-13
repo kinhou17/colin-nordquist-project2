@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-
 import wordBank5 from "../wordBanks/5letterWordBank.txt";
 import wordBank6 from "../wordBanks/6letterWordBank.txt";
 import wordBank7 from "../wordBanks/7letterWordBank.txt";
 import scrabbleDict from "../wordBanks/scrabbleDictionary.txt";
-
 
 export const generateWordSet = async (difficulty) => {
     let wordSet;

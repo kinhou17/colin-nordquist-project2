@@ -7,7 +7,6 @@ export default function Header() {
         <div className="header">
             <nav>
                 <Link className='link' to={"/"}>
-
                     <h1>Wordle</h1>
                 </Link>
             </nav>

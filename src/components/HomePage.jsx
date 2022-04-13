@@ -4,11 +4,6 @@ import "../styles/HomePage.css";
 import wordlePic from "../images/wordlePic.jpeg";
 
 export default function HomePage() {
-
-    function refreshPage() {
-        window.location.reload();
-    }
-
     return (
         <div className="homePage">
             <div id="title">
