@@ -9,7 +9,7 @@
     color: #E1E5F2;
 }
 
-img {
+.imgExample {
     border-radius: 8px;
     object-fit: contain;
     width: 33%;
@@ -51,7 +51,7 @@ img {
         flex-direction: column;
     }
 
-    img {
+    .imgExample {
         margin: auto;
         height: 30vh;
     }

@@ -1,11 +1,11 @@
 import React, { useEffect, useCallback, useContext } from 'react';
 import Key from './Key';
 import { WordleContext } from './App';
-import './Keyboard.css'
+import '../styles/Keyboard.css'
 
 
 export default function Keyboard() {
-    const { deleteSelected, letterSelected, enterSelected, board, setBoard, currGuess, setCurrGuess } = useContext(WordleContext);
+    const { deleteSelected, letterSelected, enterSelected } = useContext(WordleContext);
     const keyboardRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const keyboardRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const keyboardRow3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DEL"];

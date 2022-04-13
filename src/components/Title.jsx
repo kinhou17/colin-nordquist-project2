@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import { WordleContext } from './App';
-import './Title.css';
-import bingo from '../bingo.gif';
-
-
+import '../styles/Title.css';
+import bingo from '../images/bingo.gif';
 
 export default function Title() {
     const { difficultyOptions, gameState, error, currGuess } = useContext(WordleContext);
@@ -17,7 +15,6 @@ export default function Title() {
     } else {
         message = "You have " + (difficultyOptions.guesses - currGuess.guess) + " guesses left.";
     }
-
     return (
         <div className="title">
             {

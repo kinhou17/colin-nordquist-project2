@@ -1,21 +1,18 @@
-import React, {useContext} from "react";
-import {WordleContext} from "./App";
-import './FinishGame.css'
+import React, { useContext } from "react";
+import { WordleContext } from "./App";
+import '../styles/FinishGame.css'
 
 export default function GameOver() {
-    const {gameState, currGuess, winningWord} = useContext(WordleContext);
-
+    const { gameState, currGuess, winningWord } = useContext(WordleContext);
     let winLose;
     if (gameState.playerWon) {
         winLose = "YOU GOT IT!";
     } else {
         winLose = "YOU FAILED";
     }
-
     function refreshPage() {
         window.location.reload(false);
-      }
-
+    }
     return (
         <div className="gameOver">
             <h2>{winLose}</h2>

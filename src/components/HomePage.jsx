@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "./HomePage.css";
-import wordlePic from "../wordlePic.jpeg";
+import "../styles/HomePage.css";
+import wordlePic from "../images/wordlePic.jpeg";
 
 export default function HomePage() {
 

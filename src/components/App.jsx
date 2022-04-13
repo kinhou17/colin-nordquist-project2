@@ -4,33 +4,31 @@ import GameBoard from './GameBoard';
 import Keyboard from './Keyboard';
 import FinishGame from './FinishGame';
 import Title from './Title';
+import "../styles/App.css";
+import "../styles/Letter.css";
+import "../styles/GameBoard.css";
 import { startingBoardEasy, startingBoardMedium, startingBoardHard, boardColorsEasy, boardColorsMedium, boardColorsHard } from './GameBoard';
 import { generateWordSet, generateDictionary } from './WordSets';
-import bingo from '../bingo.gif';
-
-
-
-import "./App.css";
-import "./Letter.css";
-import "./GameBoard.css";
 
 export const WordleContext = createContext();
-
 
 export default function App(props) {
 
     const pathParams = useParams();
     const difficulty = pathParams.difficulty;
-
-
-
-    const [board, setBoard] = useState(difficulty === "easy" ? startingBoardEasy : difficulty === "medium" ? startingBoardMedium : startingBoardHard);
+    const [board, setBoard] = useState(
+        difficulty === "easy" ? startingBoardEasy : difficulty === "medium" ? startingBoardMedium : startingBoardHard
+    );
     const [currGuess, setCurrGuess] = useState({
         guess: 0,
         letterIndex: 0
     });
-    const [difficultyOptions, setDifficultyOptions] = useState(difficulty === "easy" ? { guesses: 7, numLetters: 5 } : difficulty === "medium" ? { guesses: 6, numLetters: 6 } : { guesses: 5, numLetters: 7 });
-    const [boardColors, setBoardColors] = useState(difficulty === "easy" ? boardColorsEasy : difficulty === "medium" ? boardColorsMedium : boardColorsHard);
+    const [difficultyOptions, setDifficultyOptions] = useState(
+        difficulty === "easy" ? { guesses: 7, numLetters: 5 } : difficulty === "medium" ? { guesses: 6, numLetters: 6 } : { guesses: 5, numLetters: 7 }
+    );
+    const [boardColors, setBoardColors] = useState(
+        difficulty === "easy" ? boardColorsEasy : difficulty === "medium" ? boardColorsMedium : boardColorsHard
+    );
     const [winningWord, setWinningWord] = useState("");
     const [greenKeys, setGreenKeys] = useState([]);
     const [yellowKeys, setYellowKeys] = useState([]);
@@ -40,11 +38,8 @@ export default function App(props) {
         playerWon: false
     });
     const [error, setError] = useState("none");
-
     const [wordSet, setWordSet] = useState(new Set());
     const [dictSet, setDictSet] = useState(new Set());
-
-
 
     useEffect(() => {
         generateWordSet(difficulty).then((words) => {
@@ -60,13 +55,7 @@ export default function App(props) {
         });
     }, []);
 
-    useEffect(() => {
-        //window.location.reload(false);
-    });
-
-
     function manageColoring(currGuessWord) {
-
         let greenLettersRemoved = checkGreens(currGuessWord);
         checkYellows(greenLettersRemoved);
         setGreys()
@@ -115,15 +104,12 @@ export default function App(props) {
                 }
             }
             setYellowKeys(yellowKeysTemp);
-
         }
 
     }
 
     const setGreys = () => {
         let disabledKeysTemp = [...disabledKeys];
-
-
         for (let i = 0; i < difficultyOptions.numLetters; i++) {
             if (boardColors[currGuess.guess][i] === '') {
                 let newBoard = [...boardColors];
@@ -134,7 +120,6 @@ export default function App(props) {
                 if (!yellowKeys.includes(currLetter) && !greenKeys.includes(currLetter)) {
                     disabledKeysTemp.push(currLetter);
                 }
-
             }
         }
         setDisabledKeys(disabledKeysTemp);
@@ -146,19 +131,15 @@ export default function App(props) {
             setError("lengthShort");
             return;
         }
-
         let currGuessWord = '';
         for (let i = 0; i < difficultyOptions.numLetters; i++) {
             currGuessWord += board[currGuess.guess][i];
         }
-
         if (!dictSet.has(currGuessWord) && !wordSet.has(currGuessWord)) {
             setError("invalidWord");
             return;
         }
-
         manageColoring(currGuessWord);
-
         if (currGuessWord === winningWord.toUpperCase()) {
             setGameState({
                 gameInProgress: false,
@@ -174,7 +155,6 @@ export default function App(props) {
             }
         }
     }
-
 
     function deleteSelected() {
         if (currGuess.letterIndex === 0) return;

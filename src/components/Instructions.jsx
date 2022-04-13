@@ -1,17 +1,15 @@
 import React from 'react';
-import "./Instructions.css";
+import "../styles/Instructions.css";
 import { Link } from 'react-router-dom';
-// import winExample from "../images/winExample.png";
-import gameExample from "../images/gameExample (2).png";
+import gameExample from "../images/gameExample.png";
 
 export default function Instructions() {
-
     return (
         <div>
             <div className="instructions">
                 <div id="howToPlay">HOW TO PLAY</div>
                 <div className="container">
-                    <img src={gameExample}></img>
+                    <img class="imgExample" src={gameExample}></img>
                     <div id="description">
                         <div>Here is an example of a game being played.</div>
                         <div>Try to guess the word! In this game the winning word is THORN.</div>
