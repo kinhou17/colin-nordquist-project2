@@ -12,17 +12,41 @@
     cursor: pointer;
 }
 
+.key:hover {
+    background-color: #BFDBF7;
+    color: #022B3A;
+}
+
+.key:active {
+    transform: translateY(3px);
+}
+
 #green {
     background-color: green;
+}
+
+#green:hover {
+    background-color: #BFDBF7;
+    color: #022B3A;
 }
 
 #yellow {
     background-color: rgb(149, 154, 0);
 }
 
+#yellow:hover {
+    background-color: #BFDBF7;
+    color: #022B3A;
+}
+
 #disabled {
     background-color: #00080b;
     color: #1F7A8C;
+}
+
+#disabled:hover {
+    background-color: #BFDBF7;
+    color: #022B3A;
 }
 
 #large {

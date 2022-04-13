@@ -19,11 +19,12 @@ export default function HomePage() {
                 <br></br>
                 or instructions to learn how to play.
                 <br></br>
+                <br></br>
                 Anytime you want to return to this home page,
                 <br></br>
                 click the title at the top of the page.
                 <br></br>
-                <img src={wordlePic}></img>
+                <img id="introImage" src={wordlePic}></img>
                 <br></br>
                 <br></br>
                 Let's Play!

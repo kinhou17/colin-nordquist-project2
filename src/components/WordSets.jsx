@@ -27,7 +27,6 @@ export const generateWordSet = async (difficulty) => {
                 wordSet = new Set(wordArray);
             });
         return { currWord, wordSet };
-
     } else {
         await fetch(wordBank7)
             .then((response) => response.text())
@@ -39,7 +38,6 @@ export const generateWordSet = async (difficulty) => {
         return { currWord, wordSet };
     }
 }
-
 
 export const generateDictionary = async () => {
     let dictSet;
