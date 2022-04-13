@@ -7,8 +7,6 @@ import bingo from '../bingo.gif';
 
 export default function Title() {
     const { difficultyOptions, gameState, error, currGuess } = useContext(WordleContext);
-
-    console.log(error);
     let message;
     if (error === "lengthShort") {
         message = "Guess must be " + difficultyOptions.guesses + " letters long. Try again.";
@@ -19,8 +17,6 @@ export default function Title() {
     } else {
         message = "You have " + (difficultyOptions.guesses - currGuess.guess) + " guesses left.";
     }
-
-
 
     return (
         <div className="title">

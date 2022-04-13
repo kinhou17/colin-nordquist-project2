@@ -7,13 +7,14 @@ export default function Header() {
 
 
 
-    return (<div className="header">
-        <nav>
-            <Link className='link' to={"/"}>
+    return (
+        <div className="header">
+            <nav>
+                <Link className='link' to={"/"}>
 
-                <h1>Wordle</h1>
-            </Link>
-        </nav>
-    </div>
+                    <h1>Wordle</h1>
+                </Link>
+            </nav>
+        </div>
     );
 }

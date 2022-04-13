@@ -21,13 +21,12 @@
 }
 
 #disabled {
-    background-color: #022B3A;
-    color: #022B3A;
+    background-color: #00080b;
+    color: #1F7A8C;
 }
 
 #large {
     width: 8vh;
-
 }
 
 @media (max-width: 500px) {

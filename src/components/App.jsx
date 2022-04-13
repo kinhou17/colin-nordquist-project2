@@ -60,6 +60,10 @@ export default function App(props) {
         });
     }, []);
 
+    useEffect(() => {
+        //window.location.reload(false);
+    });
+
 
     function manageColoring(currGuessWord) {
 

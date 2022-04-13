@@ -158,29 +158,3 @@ export const boardColorsHard = [
     ["", "", "", "", "", "", ""],
     ["", "", "", "", "", "", ""],
 ];
-
-
-/**
- *             {(difficulty === "easy" || difficulty === "medium") &&
-                <div className="row">
-                    <Letter letterIndex={0} attempt={5} />
-                    <Letter letterIndex={1} attempt={5} />
-                    <Letter letterIndex={2} attempt={5} />
-                    <Letter letterIndex={3} attempt={5} />
-                    <Letter letterIndex={4} attempt={5} />
-                    {difficulty === "medium" &&
-                        <Letter letterIndex={5} attempt={5} />
-                    }
-                </div>
-            }
-
-            {difficulty === "easy" &&
-                <div className="row">
-                    <Letter letterIndex={0} attempt={6} />
-                    <Letter letterIndex={1} attempt={6} />
-                    <Letter letterIndex={2} attempt={6} />
-                    <Letter letterIndex={3} attempt={6} />
-                    <Letter letterIndex={4} attempt={6} />
-                </div>
-            }
- */
