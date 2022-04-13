@@ -7,9 +7,9 @@ export default function Title() {
     const { difficultyOptions, gameState, error, currGuess } = useContext(WordleContext);
     let message;
     if (error === "lengthShort") {
-        message = "Guess must be " + difficultyOptions.guesses + " letters long. Try again.";
+        message = "Guess must be " + difficultyOptions.numLetters + " letters long. Try again.";
     } else if (error === "lengthLong") {
-        message = "Guess can only be " + difficultyOptions.guesses + " letters long.";
+        message = "Guess can only be " + difficultyOptions.numLetters + " letters long.";
     } else if (error === "invalidWord") {
         message = "Not a valid word. Try again.";
     } else {

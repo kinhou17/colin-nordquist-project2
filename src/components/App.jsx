@@ -8,7 +8,7 @@ import "../styles/App.css";
 import "../styles/Letter.css";
 import "../styles/GameBoard.css";
 import { startingBoardEasy, startingBoardMedium, startingBoardHard, boardColorsEasy, boardColorsMedium, boardColorsHard } from './GameBoard';
-import { generateWordSet, generateDictionary } from './WordSets';
+import { createWordSet, createDictionarySet } from './WordSets';
 
 export const WordleContext = createContext();
 
@@ -38,28 +38,22 @@ export default function App(props) {
         playerWon: false
     });
     const [error, setError] = useState("none");
-    const [wordSet, setWordSet] = useState(new Set());
+    const [winningWordSet, setWinningWordSet] = useState(new Set());
     const [dictSet, setDictSet] = useState(new Set());
 
     useEffect(() => {
-        generateWordSet(difficulty).then((words) => {
-            setWordSet(words.wordSet);
-            setWinningWord(words.currWord);
-            console.log(words.currWord);
-        });
-    }, []);
-
-    useEffect(() => {
-        generateDictionary().then((words) => {
+        createDictionarySet().then((words) => {
             setDictSet(words.dictSet);
         });
     }, []);
 
-    function manageColoring(currGuessWord) {
-        let greenLettersRemoved = checkGreens(currGuessWord);
-        checkYellows(greenLettersRemoved);
-        setGreys()
-    }
+    useEffect(() => {
+        createWordSet(difficulty).then((words) => {
+            setWinningWordSet(words.winningWordSet);
+            setWinningWord(words.currWord);
+            console.log(words.currWord);
+        });
+    }, []);
 
     const checkGreens = (currGuessWord) => {
         let greensRemoved = '';
@@ -125,6 +119,11 @@ export default function App(props) {
         setDisabledKeys(disabledKeysTemp);
     }
 
+    function manageColoring(currGuessWord) {
+        let greenLettersRemoved = checkGreens(currGuessWord);
+        checkYellows(greenLettersRemoved);
+        setGreys()
+    }
 
     function enterSelected() {
         if (currGuess.letterIndex < difficultyOptions.numLetters) {
@@ -135,7 +134,7 @@ export default function App(props) {
         for (let i = 0; i < difficultyOptions.numLetters; i++) {
             currGuessWord += board[currGuess.guess][i];
         }
-        if (!dictSet.has(currGuessWord) && !wordSet.has(currGuessWord)) {
+        if (!dictSet.has(currGuessWord) && !winningWordSet.has(currGuessWord)) {
             setError("invalidWord");
             return;
         }

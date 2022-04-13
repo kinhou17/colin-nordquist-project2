@@ -1,42 +1,42 @@
-import wordBank5 from "../wordBanks/5letterWordBank.txt";
-import wordBank6 from "../wordBanks/6letterWordBank.txt";
-import wordBank7 from "../wordBanks/7letterWordBank.txt";
+import wordBank5Letters from "../wordBanks/5letterWordBank.txt";
+import wordBank6Letters from "../wordBanks/6letterWordBank.txt";
+import wordBank7Letters from "../wordBanks/7letterWordBank.txt";
 import scrabbleDict from "../wordBanks/scrabbleDictionary.txt";
 
-export const generateWordSet = async (difficulty) => {
-    let wordSet;
+export const createWordSet = async (difficulty) => {
+    let winningWordSet;
     let currWord;
     if (difficulty === "easy") {
-        await fetch(wordBank5)
+        await fetch(wordBank5Letters)
             .then((response) => response.text())
             .then((result) => {
-                const wordArray = result.split("\n")
+                const wordArray = result.split("\n");
+                winningWordSet = new Set(wordArray);
                 currWord = wordArray[Math.floor(Math.random() * wordArray.length)];
-                wordSet = new Set(wordArray);
             });
-        return { currWord, wordSet };
+        return { currWord, winningWordSet };
     } else if (difficulty === "medium") {
-        await fetch(wordBank6)
+        await fetch(wordBank6Letters)
             .then((response) => response.text())
             .then((result) => {
-                const wordArray = result.split("\n")
+                const wordArray = result.split("\n");
+                winningWordSet = new Set(wordArray);
                 currWord = wordArray[Math.floor(Math.random() * wordArray.length)];
-                wordSet = new Set(wordArray);
             });
-        return { currWord, wordSet };
+        return { currWord, winningWordSet };
     } else {
-        await fetch(wordBank7)
+        await fetch(wordBank7Letters)
             .then((response) => response.text())
             .then((result) => {
-                const wordArray = result.split("\n")
+                const wordArray = result.split("\n");
+                winningWordSet = new Set(wordArray);
                 currWord = wordArray[Math.floor(Math.random() * wordArray.length)];
-                wordSet = new Set(wordArray);
             });
-        return { currWord, wordSet };
+        return { currWord, winningWordSet };
     }
 }
 
-export const generateDictionary = async () => {
+export const createDictionarySet = async () => {
     let dictSet;
     await fetch(scrabbleDict)
         .then((response) => response.text())

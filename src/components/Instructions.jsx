@@ -13,7 +13,7 @@ export default function Instructions() {
                     <div id="description">
                         <div>Here is an example of a game being played.</div>
                         <div>Try to guess the word! In this game the winning word is THORN.</div>
-                        <div>The length of the word and number of attempts varies based on difficulty selected as follows:</div>
+                        <div>The length of the word and number of attempts allowed varies based on difficulty selected as follows:</div>
                         <ul>
                             <li>EASY: 5 letter words, 7 guess opportunities</li>
                             <li>MEDIUM: 6 letter words, 6 guess opportunities</li>

@@ -9,89 +9,89 @@ export default function Board() {
     return (
         <div className="board">
             <div className="row">
-                <Letter letterIndex={0} attempt={0} />
-                <Letter letterIndex={1} attempt={0} />
-                <Letter letterIndex={2} attempt={0} />
-                <Letter letterIndex={3} attempt={0} />
-                <Letter letterIndex={4} attempt={0} />
+                <Letter letterIndex={0} guess={0} />
+                <Letter letterIndex={1} guess={0} />
+                <Letter letterIndex={2} guess={0} />
+                <Letter letterIndex={3} guess={0} />
+                <Letter letterIndex={4} guess={0} />
                 {(difficulty === "hard" || difficulty === "medium") &&
-                    <Letter letterIndex={5} attempt={0} />
+                    <Letter letterIndex={5} guess={0} />
                 }
                 {difficulty === "hard" &&
-                    <Letter letterIndex={6} attempt={0} />
+                    <Letter letterIndex={6} guess={0} />
                 }
             </div>
             <div className="row">
-                <Letter letterIndex={0} attempt={1} />
-                <Letter letterIndex={1} attempt={1} />
-                <Letter letterIndex={2} attempt={1} />
-                <Letter letterIndex={3} attempt={1} />
-                <Letter letterIndex={4} attempt={1} />
+                <Letter letterIndex={0} guess={1} />
+                <Letter letterIndex={1} guess={1} />
+                <Letter letterIndex={2} guess={1} />
+                <Letter letterIndex={3} guess={1} />
+                <Letter letterIndex={4} guess={1} />
                 {(difficulty === "hard" || difficulty === "medium") &&
-                    <Letter letterIndex={5} attempt={1} />
+                    <Letter letterIndex={5} guess={1} />
                 }
                 {difficulty === "hard" &&
-                    <Letter letterIndex={6} attempt={1} />
+                    <Letter letterIndex={6} guess={1} />
                 }
             </div>
             <div className="row">
-                <Letter letterIndex={0} attempt={2} />
-                <Letter letterIndex={1} attempt={2} />
-                <Letter letterIndex={2} attempt={2} />
-                <Letter letterIndex={3} attempt={2} />
-                <Letter letterIndex={4} attempt={2} />
+                <Letter letterIndex={0} guess={2} />
+                <Letter letterIndex={1} guess={2} />
+                <Letter letterIndex={2} guess={2} />
+                <Letter letterIndex={3} guess={2} />
+                <Letter letterIndex={4} guess={2} />
                 {(difficulty === "hard" || difficulty === "medium") &&
-                    <Letter letterIndex={5} attempt={2} />
+                    <Letter letterIndex={5} guess={2} />
                 }
                 {difficulty === "hard" &&
-                    <Letter letterIndex={6} attempt={2} />
+                    <Letter letterIndex={6} guess={2} />
                 }
             </div>
             <div className="row">
-                <Letter letterIndex={0} attempt={3} />
-                <Letter letterIndex={1} attempt={3} />
-                <Letter letterIndex={2} attempt={3} />
-                <Letter letterIndex={3} attempt={3} />
-                <Letter letterIndex={4} attempt={3} />
+                <Letter letterIndex={0} guess={3} />
+                <Letter letterIndex={1} guess={3} />
+                <Letter letterIndex={2} guess={3} />
+                <Letter letterIndex={3} guess={3} />
+                <Letter letterIndex={4} guess={3} />
                 {(difficulty === "hard" || difficulty === "medium") &&
-                    <Letter letterIndex={5} attempt={3} />
+                    <Letter letterIndex={5} guess={3} />
                 }
                 {difficulty === "hard" &&
-                    <Letter letterIndex={6} attempt={3} />
+                    <Letter letterIndex={6} guess={3} />
                 }
             </div>
             <div className="row">
-                <Letter letterIndex={0} attempt={4} />
-                <Letter letterIndex={1} attempt={4} />
-                <Letter letterIndex={2} attempt={4} />
-                <Letter letterIndex={3} attempt={4} />
-                <Letter letterIndex={4} attempt={4} />
+                <Letter letterIndex={0} guess={4} />
+                <Letter letterIndex={1} guess={4} />
+                <Letter letterIndex={2} guess={4} />
+                <Letter letterIndex={3} guess={4} />
+                <Letter letterIndex={4} guess={4} />
                 {(difficulty === "hard" || difficulty === "medium") &&
-                    <Letter letterIndex={5} attempt={4} />
+                    <Letter letterIndex={5} guess={4} />
                 }
                 {difficulty === "hard" &&
-                    <Letter letterIndex={6} attempt={4} />
+                    <Letter letterIndex={6} guess={4} />
                 }
             </div>
             {(difficulty === "easy" || difficulty === "medium") &&
                 <div className="row">
-                    <Letter letterIndex={0} attempt={5} />
-                    <Letter letterIndex={1} attempt={5} />
-                    <Letter letterIndex={2} attempt={5} />
-                    <Letter letterIndex={3} attempt={5} />
-                    <Letter letterIndex={4} attempt={5} />
+                    <Letter letterIndex={0} guess={5} />
+                    <Letter letterIndex={1} guess={5} />
+                    <Letter letterIndex={2} guess={5} />
+                    <Letter letterIndex={3} guess={5} />
+                    <Letter letterIndex={4} guess={5} />
                     {difficulty === "medium" &&
-                        <Letter letterIndex={5} attempt={5} />
+                        <Letter letterIndex={5} guess={5} />
                     }
                 </div>
             }
             {difficulty === "easy" &&
                 <div className="row">
-                    <Letter letterIndex={0} attempt={6} />
-                    <Letter letterIndex={1} attempt={6} />
-                    <Letter letterIndex={2} attempt={6} />
-                    <Letter letterIndex={3} attempt={6} />
-                    <Letter letterIndex={4} attempt={6} />
+                    <Letter letterIndex={0} guess={6} />
+                    <Letter letterIndex={1} guess={6} />
+                    <Letter letterIndex={2} guess={6} />
+                    <Letter letterIndex={3} guess={6} />
+                    <Letter letterIndex={4} guess={6} />
                 </div>
             }
         </div>

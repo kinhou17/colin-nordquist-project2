@@ -17,7 +17,7 @@ export default function GameOver() {
         <div className="gameOver">
             <h2>{winLose}</h2>
             <h2>Correct Word: {winningWord} </h2>
-            {gameState.playerWon && (<h2>You guessed in {currGuess.guess + 1} attempts</h2>)}
+            {gameState.playerWon && (<h2>You guessed in {currGuess.guess + 1} guesss</h2>)}
             <button id={"refreshButton"} onClick={refreshPage}>Click to play again!</button>
         </div>
     )

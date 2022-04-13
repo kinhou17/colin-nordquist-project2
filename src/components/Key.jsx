@@ -14,10 +14,10 @@ export default function Key({ keyValue }) {
     }
 
     function keySelected() {
-        if (keyValue === "ENTER") {
-            enterSelected();
-        } else if (keyValue === "DEL") {
+        if (keyValue === "DEL") {
             deleteSelected();
+        } else if (keyValue === "ENTER") {
+            enterSelected();
         } else {
             letterSelected(keyValue);
         }

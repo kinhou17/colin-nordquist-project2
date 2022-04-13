@@ -11,10 +11,10 @@ export default function Keyboard() {
     const keyboardRow3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DEL"];
 
     const manageletterSelected = useCallback((event) => {
-        if (event.key === "Enter") {
-            enterSelected();
-        } else if (event.key === "Backspace") {
+        if (event.key === "Backspace") {
             deleteSelected();
+        } else if (event.key === "Enter") {
+            enterSelected();
         } else {
             keyboardRow1.forEach((letter) => {
                 if (event.key.toUpperCase() === letter) {
@@ -35,27 +35,27 @@ export default function Keyboard() {
     })
 
     useEffect(() => {
-        document.addEventListener("keydown", manageletterSelected)
+        document.addEventListener("keydown", manageletterSelected);
         return function cleanup() {
-            document.removeEventListener("keydown", manageletterSelected)
+            document.removeEventListener("keydown", manageletterSelected);
         };
     });
 
     return (
         <div className="keyboard">
             <div className="keyboardRow">
-                {keyboardRow1.map((key) => {
-                    return <Key keyValue={key} />
+                {keyboardRow1.map((keyVal) => {
+                    return <Key keyValue={keyVal} />
                 })}
             </div>
             <div className="keyboardRow">
-                {keyboardRow2.map((key) => {
-                    return <Key keyValue={key} />
+                {keyboardRow2.map((keyVal) => {
+                    return <Key keyValue={keyVal} />
                 })}
             </div>
             <div className="keyboardRow">
-                {keyboardRow3.map((key) => {
-                    return <Key keyValue={key} />
+                {keyboardRow3.map((keyVal) => {
+                    return <Key keyValue={keyVal} />
                 })}
             </div>
         </div>
