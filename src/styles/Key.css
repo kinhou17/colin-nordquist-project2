@@ -4,11 +4,11 @@
     width: 5vh;
     height: 5vh;
     margin: 5px;
-    font-size: 1.4vh;
-    font-weight: bold;
     background-color: #1F7A8C;
     color: #E1E5F2;
     font-family: 'Arial';
+    font-size: 1.4vh;
+    font-weight: bold;
     cursor: pointer;
 }
 

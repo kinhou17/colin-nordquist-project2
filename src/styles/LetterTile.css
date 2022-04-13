@@ -1,4 +1,4 @@
-.letter {
+.letterTile {
     flex: 100%;
     height: 5vh;
     width: 5vh;
@@ -6,10 +6,10 @@
     margin: 5px;
     display: grid;
     place-items: center;
-    font-size: 40px;
-    font-weight: 800;
     color: #E1E5F2;
     font-family: Arial;
+    font-size: 40px;
+    font-weight: 800;
 }
 
 #green {

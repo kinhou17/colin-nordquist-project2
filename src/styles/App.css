@@ -1,4 +1,4 @@
-.app {
+.wordle {
     width: 100vw;
     height: 100vh;
     text-align: center;
@@ -31,7 +31,7 @@ img {
         font-size: 15px;
     }
 
-    .app {
+    .wordle {
         padding-top: 10px;
     }
 }

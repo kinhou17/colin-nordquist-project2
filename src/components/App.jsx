@@ -5,7 +5,7 @@ import Keyboard from './Keyboard';
 import FinishGame from './FinishGame';
 import Title from './Title';
 import "../styles/App.css";
-import "../styles/Letter.css";
+import "../styles/LetterTile.css";
 import "../styles/GameBoard.css";
 import { startingBoardEasy, startingBoardMedium, startingBoardHard, boardColorsEasy, boardColorsMedium, boardColorsHard } from './GameBoard';
 import { createWordSet, createDictionarySet } from './WordSets';
@@ -16,7 +16,7 @@ export default function App(props) {
 
     const pathParams = useParams();
     const difficulty = pathParams.difficulty;
-    const [board, setBoard] = useState(
+    const [boardLetters, setBoardLetters] = useState(
         difficulty === "easy" ? startingBoardEasy : difficulty === "medium" ? startingBoardMedium : startingBoardHard
     );
     const [currGuess, setCurrGuess] = useState({
@@ -42,16 +42,15 @@ export default function App(props) {
     const [dictSet, setDictSet] = useState(new Set());
 
     useEffect(() => {
-        createDictionarySet().then((words) => {
-            setDictSet(words.dictSet);
+        createDictionarySet().then((dictWords) => {
+            setDictSet(dictWords.dictSet);
         });
     }, []);
 
     useEffect(() => {
-        createWordSet(difficulty).then((words) => {
-            setWinningWordSet(words.winningWordSet);
-            setWinningWord(words.currWord);
-            console.log(words.currWord);
+        createWordSet(difficulty).then((winnignWords) => {
+            setWinningWord(winnignWords.currWord);
+            setWinningWordSet(winnignWords.winningWordSet);
         });
     }, []);
 
@@ -110,7 +109,7 @@ export default function App(props) {
                 newBoard[currGuess.guess][i] = 'grey';
                 setBoardColors(newBoard);
 
-                const currLetter = board[currGuess.guess][i];
+                const currLetter = boardLetters[currGuess.guess][i];
                 if (!yellowKeys.includes(currLetter) && !greenKeys.includes(currLetter)) {
                     disabledKeysTemp.push(currLetter);
                 }
@@ -125,6 +124,29 @@ export default function App(props) {
         setGreys()
     }
 
+    function letterSelected(key) {
+        const currBoard = [...boardLetters];
+        if (currGuess.letterIndex >= difficultyOptions.numLetters) {
+            setError("lengthLong");
+            return;
+        } else {
+            setError("none");
+        }
+        currBoard[currGuess.guess][currGuess.letterIndex] = key;
+        setCurrGuess({ guess: currGuess.guess, letterIndex: currGuess.letterIndex + 1 });
+        setBoardLetters(currBoard);
+    }
+
+    function deleteSelected() {
+        if (currGuess.letterIndex === 0) return;
+        const currBoard = [...boardLetters];
+        setError("none");
+        const newIndex = currGuess.letterIndex - 1;
+        currBoard[currGuess.guess][newIndex] = '';
+        setCurrGuess({ guess: currGuess.guess, letterIndex: newIndex });
+        setBoardLetters(currBoard);
+    }
+
     function enterSelected() {
         if (currGuess.letterIndex < difficultyOptions.numLetters) {
             setError("lengthShort");
@@ -132,7 +154,7 @@ export default function App(props) {
         }
         let currGuessWord = '';
         for (let i = 0; i < difficultyOptions.numLetters; i++) {
-            currGuessWord += board[currGuess.guess][i];
+            currGuessWord += boardLetters[currGuess.guess][i];
         }
         if (!dictSet.has(currGuessWord) && !winningWordSet.has(currGuessWord)) {
             setError("invalidWord");
@@ -155,35 +177,11 @@ export default function App(props) {
         }
     }
 
-    function deleteSelected() {
-        if (currGuess.letterIndex === 0) return;
-        setError("none");
-        const currBoard = [...board];
-        const newIndex = currGuess.letterIndex - 1;
-        currBoard[currGuess.guess][newIndex] = '';
-        setCurrGuess({ guess: currGuess.guess, letterIndex: newIndex });
-        setBoard(currBoard);
-    }
-
-    function letterSelected(key) {
-        const currBoard = [...board];
-        if (currGuess.letterIndex >= difficultyOptions.numLetters) {
-            setError("lengthLong");
-            return;
-        } else {
-            setError("none");
-        }
-        currBoard[currGuess.guess][currGuess.letterIndex] = key;
-        setBoard(currBoard);
-        setCurrGuess({ guess: currGuess.guess, letterIndex: currGuess.letterIndex + 1 });
-    }
-
     return (
-        <div className="app">
+        <div className="wordle">
             <WordleContext.Provider value={
                 {
-                    board,
-                    setBoard,
+                    boardLetters,
                     currGuess,
                     setCurrGuess,
                     boardColors,

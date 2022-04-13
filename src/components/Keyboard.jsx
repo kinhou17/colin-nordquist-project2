@@ -10,7 +10,16 @@ export default function Keyboard() {
     const keyboardRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const keyboardRow3 = ["ENTER", "Z", "X", "C", "V", "B", "N", "M", "DEL"];
 
+
+    useEffect(() => {
+        document.addEventListener("keydown", manageletterSelected);
+        return function cleanup() {
+            document.removeEventListener("keydown", manageletterSelected);
+        };
+    });
+
     const manageletterSelected = useCallback((event) => {
+        
         if (event.key === "Backspace") {
             deleteSelected();
         } else if (event.key === "Enter") {
@@ -33,13 +42,6 @@ export default function Keyboard() {
             });
         }
     })
-
-    useEffect(() => {
-        document.addEventListener("keydown", manageletterSelected);
-        return function cleanup() {
-            document.removeEventListener("keydown", manageletterSelected);
-        };
-    });
 
     return (
         <div className="keyboard">
