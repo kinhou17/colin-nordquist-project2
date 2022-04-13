@@ -1,10 +1,10 @@
 # Wordle Clone
 ## Created by Colin Nordquist for CS5610
-
+<br>
 [APP LINK](https://colin-nordquist-wordle.herokuapp.com/)
-
-
-
+<br>
+<br>
+<br>
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
