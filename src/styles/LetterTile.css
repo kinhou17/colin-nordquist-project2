@@ -25,7 +25,7 @@
 }
 
 @media (max-width: 500px) {
-    .letter {
+    .letterTile {
         margin: 1px;
         font-size: 25px;
         height: 4vh;
